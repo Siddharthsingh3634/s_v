@@ -119,8 +119,15 @@ class _addItemsState extends State<addItems> {
             readOnly: true,
           ),
           TextFormField(
+            // validator: (value) {
+            //   if (value == null || value.isEmpty) {
+            //     return 'Please enter contact';
+            //   }
+            //   return null;
+            // },
             controller: _qty,
             keyboardType: TextInputType.number,
+
             decoration: const InputDecoration(
               filled: true,
               border: OutlineInputBorder(),
