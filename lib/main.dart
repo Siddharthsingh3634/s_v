@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
         focusElevation: 100,
         child: const Icon(
           Icons.add,
-          size: 30,
+          size: 50,
         ),
       ),
       appBar: AppBar(
@@ -70,17 +70,16 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  // ignore: prefer_const_constructors
                   Expanded(
                     flex: 1,
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      child: const Text(
-                        "Event Date: ",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
+                    child: const Text(
+                      "Event Date:",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                   ),
                   Expanded(
@@ -187,6 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           hintText: 'Borrower name',
                         ),
+                        readOnly: true,
                       ),
                     ),
                   ),
@@ -257,6 +257,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           hintText: 'Requester name',
                         ),
+                        readOnly: true,
                       ),
                     ),
                   ),
