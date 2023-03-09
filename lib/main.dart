@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:s_v/add.dart';
+import 'package:s_v/test.dart';
+import 'package:s_v/uom.dart';
+import 'package:s_v/workrole.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,17 +18,28 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.brown,
+        primarySwatch: Colors.blueGrey,
       ),
-      home: const MyHomePage(title: 'Check-out'),
+      home: MyHomePage(
+        sku: '',
+        cs: '',
+        iname: '',
+        wsite: '',
+        qty: '',
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  String sku, cs, iname, wsite, qty;
 
-  final String title;
+  MyHomePage(
+      {required this.sku,
+      required this.cs,
+      required this.iname,
+      required this.wsite,
+      required this.qty});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -62,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Check-out'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -78,8 +92,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: const Text(
                       "Event Date:",
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                   ),
                   Expanded(
@@ -194,7 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0),
+              padding: EdgeInsets.only(left: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -216,14 +230,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: EdgeInsets.all(15.0),
               child: Row(
                 children: [
                   Expanded(
                     flex: 1,
                     child: Container(
                       alignment: Alignment.centerRight,
-                      child: const Text(
+                      child: Text(
                         "Requester: ",
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -241,9 +255,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         decoration: InputDecoration(
                           filled: true,
                           hoverColor: Colors.blue.shade100,
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(),
                           suffixIcon: PopupMenuButton<String>(
-                            icon: const Icon(Icons.arrow_drop_down),
+                            icon: Icon(Icons.arrow_drop_down),
                             onSelected: (String value) {
                               req.text = value;
                             },
@@ -264,13 +278,72 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            const Padding(
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const workRole()),
+                  );
+                },
+                child: Text('Workrole')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const uom()),
+                  );
+                },
+                child: Text('UOM')),
+                ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const test()),
+                  );
+                },
+                child: Text('test')),
+            Padding(
               padding: EdgeInsets.all(8.0),
               child: Divider(
-                color: Colors.brown,
+                color: Colors.blueGrey,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: Card(
+                      elevation: 40,
+                      margin: EdgeInsets.all(2),
+                      child: ClipPath(
+                        clipper: ShapeBorderClipper(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(3))),
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: const BoxDecoration(
+                              border: Border(
+                                  left: BorderSide(
+                                      color: Colors.blueGrey, width: 5))),
+                          child: Column(
+                            children: [
+                              Text('SKU : ${widget.sku}'),
+                              Text('Current stock : ${widget.cs}'),
+                              Text('Item name : ${widget.iname}'),
+                              Text('Work site: ${widget.wsite}'),
+                              Text('Qty: ${widget.qty}'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             )
-            
           ],
         ),
       ),

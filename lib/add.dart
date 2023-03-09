@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:s_v/main.dart';
 
 class addItems extends StatefulWidget {
   const addItems({super.key});
@@ -15,7 +16,7 @@ class _addItemsState extends State<addItems> {
   TextEditingController _itn = TextEditingController();
   TextEditingController _site = TextEditingController();
   TextEditingController _qty = TextEditingController();
-  ScrollController _lvb = ScrollController();
+  
 
   var sites = [
     "Workstation 1",
@@ -23,11 +24,14 @@ class _addItemsState extends State<addItems> {
     "Workstation 3",
     "Workstation 4"
   ];
-  final List<String> list = <String>[];
+  final List<String> sku = <String>[];
+  final List<String> cs = <String>[];
+  final List<String> iname = <String>[];
 
   void addItemToList() {
     setState(() {
-      list.insert(0, _sku.text);
+      sku.insert(0, _sku.text);
+      cs.insert(0, _cs.text);
     });
   }
 
@@ -47,7 +51,7 @@ class _addItemsState extends State<addItems> {
             //   return null;
             // },
             controller: _sku,
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.number,
 
             decoration: const InputDecoration(
               filled: true,
@@ -98,13 +102,13 @@ class _addItemsState extends State<addItems> {
             //   return null;
             // },
             controller: _site,
-            keyboardType: TextInputType.number,
+            keyboardType: TextInputType.text,
 
             decoration: InputDecoration(
               filled: true,
               border: const OutlineInputBorder(),
               suffixIcon: PopupMenuButton<String>(
-                icon: const Icon(Icons.arrow_drop_down),
+                icon: const Icon(Icons.keyboard_arrow_down_outlined),
                 onSelected: (String value) {
                   _site.text = value;
                 },
@@ -139,29 +143,57 @@ class _addItemsState extends State<addItems> {
             children: [
               ElevatedButton(
                   onPressed: () {
-                    addItemToList();
+                    // addItemToList();
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyHomePage(sku: _sku.text, cs: _cs.text, iname: _itn.text, wsite: _site.text, qty: _qty.text)));
                   },
                   child: const Text('Add')),
-              ElevatedButton(onPressed: () {}, child: const Text('cancel')),
+              ElevatedButton(onPressed: () {
+                Navigator.pop(context);
+              }, child: const Text('cancel')),
             ],
           ),
           ListView.builder(
-              controller: _lvb,
+              
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               padding: const EdgeInsets.all(8),
-              itemCount: list.length,
+              itemCount: sku.length,
               itemBuilder: (BuildContext context, int index) {
                 return Card(
                   elevation: 10,
                   margin: EdgeInsets.all(2),
-                  child: Center(
-                      child: Text(
-                    '${list[index]} ',
+                  child: ClipPath(
+                    clipper: ShapeBorderClipper(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(3))),
+                    child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          left: BorderSide(color: Colors.brown, width: 5))),
+                  child: Text(
+                    'SKU : ${sku[index]}' ,
                     style: TextStyle(fontSize: 18),
-                  )),
+                  ),
+                    ),
+                  ),
                 );
-              })
+              }),
+          // Card(
+          //     elevation: 10,
+          //     child: ClipPath(
+          //       clipper: ShapeBorderClipper(
+          //           shape: RoundedRectangleBorder(
+          //               borderRadius: BorderRadius.circular(3))),
+          //       child: Container(
+          //         padding: const EdgeInsets.all(16),
+          //         decoration: const BoxDecoration(
+          //             border: Border(
+          //                 left: BorderSide(color: Colors.teal, width: 5))),
+          //         child: const Text("hi"),
+          //       ),
+          //     ),
+          //   ),
         ]),
       ),
     );
