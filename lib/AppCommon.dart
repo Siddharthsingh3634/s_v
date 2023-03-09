@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppCommon
 {
-static String hostName = "http://192.168.1.89:22518";
+static String hostName = "http://192.168.1.89:5000";
 
 showErrorAlertDialog(BuildContext context1, String msg) {
   showDialog(
