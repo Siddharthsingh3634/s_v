@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:s_v/add.dart';
-import 'package:s_v/test.dart';
 import 'package:s_v/uom.dart';
 import 'package:s_v/workrolepage.dart';
 
@@ -110,8 +109,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         controller: sed, //editing controller of this TextField
                         decoration: InputDecoration(
                             filled: true,
+                            fillColor: Color.fromARGB(73, 96, 125, 139),
                             hoverColor: Colors.blue.shade100,
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15)),
                             // icon: Icon(Icons.calenda), //icon of text field
                             hintText: "Select date",
                             suffixIcon: IconButton(
@@ -183,8 +184,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
                         decoration: InputDecoration(
                           filled: true,
+                          fillColor: Color.fromARGB(73, 96, 125, 139),
                           hoverColor: Colors.blue.shade100,
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)),
                           suffixIcon: PopupMenuButton<String>(
                             icon: const Icon(Icons.arrow_drop_down),
                             onSelected: (String value) {
@@ -254,8 +257,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           filled: true,
+                          fillColor: Color.fromARGB(73, 96, 125, 139),
                           hoverColor: Colors.blue.shade100,
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)),
                           suffixIcon: PopupMenuButton<String>(
                             icon: Icon(Icons.arrow_drop_down),
                             onSelected: (String value) {
@@ -294,14 +299,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 },
                 child: Text('UOM')),
-                ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const test()),
-                  );
-                },
-                child: Text('test')),
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Divider(
