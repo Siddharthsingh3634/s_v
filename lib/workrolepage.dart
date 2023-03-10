@@ -49,6 +49,7 @@ class _workRoleState extends State<workRole> {
 
       setState(() {
         lstRoles = _LstRoles;
+        roleId = 0;
       });
     }
   }
@@ -84,7 +85,7 @@ class _workRoleState extends State<workRole> {
 
   void deleteItem(int WRole_ID) async {
     String encodedURl = AppCommon.hostName +
-        "/List/DeleteWorkRole?wRoleID" +
+        "/List/DeleteWorkRole?wRoleID=" +
         WRole_ID.toString();
 
     http.Response response = await http
@@ -115,66 +116,120 @@ class _workRoleState extends State<workRole> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+                onPressed: () {
+                  LoadWorkRoleList();
+                  wrole.clear();
+                  FocusScope.of(context).unfocus();
+                },
+                icon: Icon(Icons.refresh_outlined)),
+          )
+        ],
         title: const Text('Work Role'),
       ),
       body: Form(
         key: formKey,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter work role!';
-                  }
-                  return null;
-                },
-                controller: wrole,
-                keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                  filled: true,
-                  border: OutlineInputBorder(),
-                  suffixIcon: Icon(Icons.person),
-                  hintText: 'Work role',
+            Card(
+              elevation: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: SizedBox(
+                        height: 55,
+                        child: Padding(
+                          padding: const EdgeInsets.all(1.0),
+                          child: TextFormField(
+                            maxLength: 50,
+                            // validator: (value) {
+                            //   if (value == null || value.isEmpty) {
+                            //     return ;
+                            //   }
+                            //   return null;
+                            // },
+                            controller: wrole,
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              counterText: '',
+                              filled: true,
+                              
+                              fillColor: Color.fromARGB(73, 96, 125, 139),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                              suffixIcon: Icon(Icons.person),
+                              hintText: 'Work role',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        height: 45,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              if (wrole.text == "" || wrole.text == null) {
+                                return AppCommon().showAlertWithoutTitleDialog(
+                                    context, 'Please enter role!!');
+                              }
+                              addItemToList();
+                            },
+                            child: Text(roleId > 0 ? 'Update' : 'Add')),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 15.0, right: 15),
+            //   child: Row(
+            //     children: [
+
+            //       const Spacer(),
+            //       if (roleId > 0)
+            //         ElevatedButton(
+            //             onPressed: () {
+            //               setState(() {
+            //                 roleId = 0;
+            //                 wrole.text = "";
+            //               });
+            //             },
+            //             child: const Text('Cancel')),
+            //       // ElevatedButton(
+            //       // onPressed: () {
+
+            //       // },
+            //       // child: const Text('Update')),
+            //     ],
+            //   ),
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.all(8),
+            //   child: Divider(
+            //     color: Colors.blueGrey,
+            //   ),
+            // ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15),
+              padding: const EdgeInsets.only(left: 15.0, top: 6, bottom: 10),
               child: Row(
                 children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          addItemToList();
-                        }
-                      },
-                      child: Text(roleId > 0 ? 'Update' : 'Add')),
-                  const Spacer(),
-                  if (roleId > 0)
-                    ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            roleId = 0;
-                            wrole.text = "";
-                          });
-                        },
-                        child: const Text('Cancel')),
-                  // ElevatedButton(
-                  // onPressed: () {
-
-                  // },
-                  // child: const Text('Update')),
+                  Text(
+                    'Total no. of roles :- ${lstRoles.length}',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(8),
-              child: Divider(
-                color: Colors.blueGrey,
-              ),
-            ),
+
             Expanded(
               child: ListView.builder(
                   physics: const ScrollPhysics(),
@@ -182,21 +237,21 @@ class _workRoleState extends State<workRole> {
                   shrinkWrap: true,
                   padding: const EdgeInsets.all(8),
                   itemCount: lstRoles.length,
-                  
                   itemBuilder: (BuildContext context, int index) {
                     return SizedBox(
-                      height: 60,
+                      height:MediaQuery.of(context).size.height*0.08,
+                      
                       child: Card(
-                         elevation: 10,
+                        elevation: 10,
                         shadowColor: Colors.blueGrey,
 
-                        //  margin: const EdgeInsets.all(10),
+                        //  margin: const EdgeInsets.all(1),
                         child: ClipPath(
                           clipper: ShapeBorderClipper(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5))),
                           child: Container(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(5),
                             decoration: const BoxDecoration(
                                 gradient: LinearGradient(
                                     begin: Alignment.centerLeft,
@@ -213,7 +268,6 @@ class _workRoleState extends State<workRole> {
                                     left: BorderSide(
                                         color: Colors.blueGrey, width: 2))),
                             child: Row(
-                            
                               children: [
                                 IconButton(
                                     onPressed: () {
@@ -224,7 +278,7 @@ class _workRoleState extends State<workRole> {
                                       });
                                     },
                                     icon: const Icon(Icons.edit_outlined,
-                                        color: Colors.black)),
+                                        color: Colors.blue)),
                                 Text(
                                   lstRoles[index].WorkRoleName,
                                   style: const TextStyle(fontSize: 18),
@@ -235,7 +289,8 @@ class _workRoleState extends State<workRole> {
                                       deleteItem(lstRoles[index].WRole_ID);
                                     },
                                     icon: Icon(Icons.delete_outline,
-                                        color: Color.fromARGB(255, 241, 119, 110)))
+                                        color:
+                                            Color.fromARGB(255, 241, 119, 110)))
                               ],
                             ),
                           ),
@@ -244,7 +299,7 @@ class _workRoleState extends State<workRole> {
                     );
                   }),
             ),
-          ], 
+          ],
         ),
       ),
     );
