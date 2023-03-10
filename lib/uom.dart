@@ -22,7 +22,7 @@ class _uomState extends State<uom> {
   TextEditingController _uomCode = TextEditingController();
   List<Uom> lstUom = [];
 
-  final formKey = GlobalKey<FormState>();
+ 
 
   String uomId = '';
 
@@ -137,13 +137,15 @@ class _uomState extends State<uom> {
                 Expanded(
                   flex: 6,
                   child: SizedBox(
-                    height: 55,
+                    height: MediaQuery.of(context).size.height*0.07,
                     child: TextField(
+                      
                       
                       maxLength: 4,
                       controller: _uomCode,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
+                        
                         
                         counterText: "",
                         filled: true,
@@ -162,7 +164,7 @@ class _uomState extends State<uom> {
                 Expanded(
                   flex: 12,
                   child: SizedBox(
-                    height: 55,
+                    height: MediaQuery.of(context).size.height*0.07,
                     child: TextField(
                       maxLength: 20,
                       // validator: (value) {
@@ -201,6 +203,19 @@ class _uomState extends State<uom> {
                   addUomList();
               },
               child: Text(uomId != "" ? 'Update' : 'Add')),
+
+              Padding(
+              padding: const EdgeInsets.only(left: 15.0, top: 6, bottom: 10),
+              child: Row(
+                children: [
+                  Text(
+                    'Total no. of Units :- ${lstUom.length}',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+
           Expanded(
             child: ListView.builder(
                 physics: const ScrollPhysics(),
@@ -226,11 +241,18 @@ class _uomState extends State<uom> {
                                   end: Alignment.centerRight,
                                   colors: [
                                     Colors.blueGrey,
+                                     
+                                    
                                     Colors.white,
                                     Colors.white,
                                     Colors.white,
                                     Colors.white,
                                     Colors.white,
+                                    Colors.white,
+                                    Colors.white,
+                                    Colors.white,
+                                     Color.fromARGB(160, 248, 166, 166),
+                                    
                                   ]),
                               border: Border(
                                   left: BorderSide(
@@ -260,9 +282,10 @@ class _uomState extends State<uom> {
                                   onPressed: () {
                                     deleteItem(lstUom[index].UomCode);
                                   },
-                                  icon: const Icon(Icons.delete_outline,
+                                  icon: const Icon(Icons.delete_sharp,
+                                  // shadows: [Shadow(color: Color.fromARGB(255, 194, 123, 123), blurRadius: 10.0)],
                                       color:
-                                          Color.fromARGB(255, 241, 119, 110)))
+                                          Color.fromARGB(255, 126, 125, 125)))
                             ],
                           ),
                         ),
