@@ -151,7 +151,7 @@ class _uomState extends State<uom> {
                         filled: true,
                         fillColor: Color.fromARGB(73, 96, 125, 139),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)
+                          borderRadius: BorderRadius.circular(3)
                         ),
                         hintText: 'Unit code ',
                       ),
@@ -180,7 +180,7 @@ class _uomState extends State<uom> {
                         filled: true,
                         fillColor: Color.fromARGB(73, 96, 125, 139),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)
+                          borderRadius: BorderRadius.circular(3)
                         ),
                         hintText: 'Unit name',
                       ),
@@ -232,7 +232,7 @@ class _uomState extends State<uom> {
                       child: ClipPath(
                         clipper: ShapeBorderClipper(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5))),
+                                borderRadius: BorderRadius.circular(3))),
                         child: Container(
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(

@@ -143,8 +143,8 @@ class _addItemsState extends State<addItems> {
             children: [
               ElevatedButton(
                   onPressed: () {
-                    // addItemToList();
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyHomePage(sku: _sku.text, cs: _cs.text, iname: _itn.text, wsite: _site.text, qty: _qty.text)));
+                    addItemToList();
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyHomePage(sku: _sku.text, cs: _cs.text, iname: _itn.text, wsite: _site.text, qty: _qty.text)));
                   },
                   child: const Text('Add')),
               ElevatedButton(onPressed: () {

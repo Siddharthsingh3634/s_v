@@ -162,7 +162,7 @@ class _workRoleState extends State<workRole> {
                               
                               fillColor: Color.fromARGB(73, 96, 125, 139),
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15)),
+                                  borderRadius: BorderRadius.circular(3)),
                               suffixIcon: Icon(Icons.person),
                               hintText: 'Work role',
                             ),
@@ -249,7 +249,7 @@ class _workRoleState extends State<workRole> {
                         child: ClipPath(
                           clipper: ShapeBorderClipper(
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5))),
+                                  borderRadius: BorderRadius.circular(3))),
                           child: Container(
                             padding: const EdgeInsets.all(5),
                             decoration: const BoxDecoration(
