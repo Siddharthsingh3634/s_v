@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:s_v/AppCommon.dart';
 import 'package:s_v/itemgrpsrch.dart';
 
 class itemAdd extends StatefulWidget {
@@ -17,6 +18,16 @@ class _itemAddState extends State<itemAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IconButton(onPressed: (){
+            if(gn.text==null||gn.text==''){
+              return AppCommon().showAlertWithoutTitleDialog(context, 'Field Empty!');
+            }
+            else
+             Navigator.pop(context);
+          }, icon: Icon(Icons.save_outlined)),
+        )],
         title: Text('Add Group'),
       ),
       body: Padding(

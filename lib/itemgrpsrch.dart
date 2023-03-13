@@ -17,7 +17,13 @@ TextEditingController sbin = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Select Item'),),
+      appBar: AppBar(title: Text('Select Item'),
+      actions: [Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: IconButton(onPressed: (){
+          Navigator.pop(context);
+        }, icon: Icon(Icons.assignment_outlined)),
+      )],),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
